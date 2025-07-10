@@ -108,8 +108,7 @@ const Calendar = () => {
           layout
           className={`p-4 border text-center cursor-pointer rounded-md transition-all duration-300 ease-in-out
             ${selectedDay === day ? 'bg-blue-600 text-white font-bold shadow-lg' : 'hover:bg-blue-100'}
-            ${isToday ? 'ring-2 ring-blue-500 ring-offset-2' : ''}
-          `}
+            ${isToday ? 'ring-2 ring-blue-500 ring-offset-2' : ''}`}
         >
           {day}
         </motion.div>
@@ -138,10 +137,9 @@ const Calendar = () => {
   const totalPages = Math.ceil(registrations.length / rowsPerPage);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-blue-500  to-blue-200 py-10 px-4">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-       
-        <div className="col-span-1 bg-gradient-to-br from-white  backdrop-blur-lg p-6 rounded-xl shadow-xl border border-blue-900">
+    <div className="min-h-screen bg-gradient-to-br from-white via-blue-500 to-blue-200 py-10 px-4">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="bg-white/80 p-6 rounded-xl shadow-xl border border-blue-900">
           <h1 className="text-3xl font-bold text-center text-black mb-4">📅 Calendar</h1>
 
           <div className="flex justify-center mb-4">
@@ -149,7 +147,7 @@ const Calendar = () => {
               onClick={() => handleDateClick(today.getDate(), today.getMonth(), today.getFullYear())}
               className="bg-slate-900 hover:bg-gray-300 hover:text-black text-white text-xl px-4 py-2 rounded-full shadow transition duration-300 transform hover:scale-105"
             >
-             Today
+              Today
             </button>
           </div>
 
@@ -159,20 +157,19 @@ const Calendar = () => {
               <select
                 value={selectedMonthIndex}
                 onChange={handleMonthChange}
-                className="w-full p-2 border rounded focus:ring focus:ring-blue-300"
+                className="w-full p-2 border rounded"
               >
                 {months.map((month, index) => (
                   <option key={month.name} value={index}>{month.name}</option>
                 ))}
               </select>
             </div>
-
             <div>
               <label className="text-black font-medium mr-2">Year:</label>
               <select
                 value={selectedYear}
                 onChange={handleYearChange}
-                className="w-full p-2 border rounded focus:ring focus:ring-blue-300"
+                className="w-full p-2 border rounded"
               >
                 {years.map((year) => (
                   <option key={year} value={year}>{year}</option>
@@ -183,7 +180,7 @@ const Calendar = () => {
 
           <div className="grid grid-cols-7 text-center font-bold text-blue-700 bg-blue-100 rounded-t-md">
             {daysOfWeek.map((day) => (
-              <div key={day} className="p-2 border">{day}</div>
+              <div key={day} className="p-2 border text-xs md:text-sm">{day}</div>
             ))}
           </div>
 
@@ -192,99 +189,80 @@ const Calendar = () => {
           </div>
         </div>
 
-        
-        <div className="col-span-2 bg-gradient-to-br from-white via-slate-100  backdrop-blur-md p-6 rounded-xl shadow-xl border border-blue-200 overflow-x-auto">
+        <div className="lg:col-span-2 bg-white/90 p-6 rounded-xl shadow-xl border border-blue-200 overflow-x-auto">
           <h2 className="text-3xl font-bold text-center text-black mb-4">📝 Registrations</h2>
 
           {selectedDay ? (
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`${selectedDay}-${selectedMonthIndex}-${selectedYear}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="text-center text-blue-600 font-medium mb-3 text-lg">
-                  {months[selectedMonthIndex].name} {selectedDay}, {selectedYear}
-                </div>
+            <div>
+              <div className="text-center text-blue-600 font-medium mb-3 text-lg">
+                {months[selectedMonthIndex].name} {selectedDay}, {selectedYear}
+              </div>
 
-                {loading ? (
-                  <p className="text-center text-blue-500">Loading...</p>
-                ) : (
-                  <>
-                    <p className="text-center text-xl text-gray-700 mb-3">
-                      Total Registrations: <span className="font-semibold">{registrations.length}</span>
-                    </p>
+              {loading ? (
+                <p className="text-center text-blue-500">Loading...</p>
+              ) : (
+                <>
+                  <p className="text-center text-xl text-gray-700 mb-3">
+                    Total Registrations: <span className="font-semibold">{registrations.length}</span>
+                  </p>
 
-                    {registrations.length > 0 ? (
-                      <>
-                        <table className="w-full text-sm border-collapse border border-blue-200 rounded overflow-hidden">
-                          <thead className="bg-blue-100 text-blue-800">
-                            <tr>
-                              <th className="border px-4 py-2 text-left">Name</th>
-                              <th className="border px-4 py-2 text-left">Email</th>
-                              <th className="border px-4 py-2 text-left">Qualification</th>
-                              <th className="border px-4 py-2 text-left">Passout Year</th>
-                               <th className="border px-4 py-2 text-left">Phone</th>
+                  {registrations.length > 0 ? (
+                    <>
+                      <table className="w-full text-sm border-collapse border border-blue-200">
+                        <thead className="bg-blue-100 text-blue-800">
+                          <tr>
+                            <th className="border px-4 py-2 text-left">Name</th>
+                            <th className="border px-4 py-2 text-left">Email</th>
+                            <th className="border px-4 py-2 text-left">Qualification</th>
+                            <th className="border px-4 py-2 text-left">Passout Year</th>
+                            <th className="border px-4 py-2 text-left">Phone</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {currentRegistrations.map((reg) => (
+                            <tr key={reg._id} className="hover:bg-blue-50">
+                              <td className="border px-4 py-2">{reg.firstName} {reg.lastName}</td>
+                              <td className="border px-4 py-2">{reg.email}</td>
+                              <td className="border px-4 py-2">{reg.qualification}</td>
+                              <td className="border px-4 py-2">{reg.passoutYear}</td>
+                              <td className="border px-4 py-2">{reg.phone}</td>
                             </tr>
-                          </thead>
-                          <tbody>
-                            {currentRegistrations.map((reg) => (
-                              <tr key={reg._id} className="hover:bg-blue-50">
-                                <td className="border px-4 py-2">{reg.firstName}<span> </span>
-                                  {reg.lastName}
-                                </td>
-                                <td className="border px-4 py-2">{reg.email}</td>
-                                <td className="border px-4 py-2">{reg.qualification}</td>
-                                <td className="border px-4 py-2">{reg.passoutYear}</td>
-                                <td className="border px-4 py-2">{reg.phone}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
+                          ))}
+                        </tbody>
+                      </table>
 
-                        {totalPages > 1 && (
-                          <div className="flex justify-center gap-2 mt-4 flex-wrap">
+                      {totalPages > 1 && (
+                        <div className="flex justify-center gap-2 mt-4 flex-wrap">
+                          <button
+                            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                            disabled={currentPage === 1}
+                            className="px-3 py-1 bg-blue-200 text-blue-800 rounded disabled:opacity-50"
+                          >◀ Prev</button>
+
+                          {Array.from({ length: totalPages }, (_, i) => (
                             <button
-                              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                              disabled={currentPage === 1}
-                              className="px-3 py-1 bg-blue-200 text-blue-800 rounded disabled:opacity-50"
+                              key={i + 1}
+                              onClick={() => setCurrentPage(i + 1)}
+                              className={`px-3 py-1 rounded ${currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-800'}`}
                             >
-                              ◀ Prev
+                              {i + 1}
                             </button>
+                          ))}
 
-                            {Array.from({ length: totalPages }, (_, i) => (
-                              <button
-                                key={i + 1}
-                                onClick={() => setCurrentPage(i + 1)}
-                                className={`px-3 py-1 rounded ${
-                                  currentPage === i + 1
-                                    ? 'bg-blue-600 text-white'
-                                    : 'bg-blue-100 text-blue-800'
-                                }`}
-                              >
-                                {i + 1}
-                              </button>
-                            ))}
-
-                            <button
-                              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                              disabled={currentPage === totalPages}
-                              className="px-3 py-1 bg-blue-200 text-blue-700 rounded disabled:opacity-50"
-                            >
-                              Next ▶
-                            </button>
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <p className="text-center text-gray-600">No registrations for this date.</p>
-                    )}
-                  </>
-                )}
-              </motion.div>
-            </AnimatePresence>
+                          <button
+                            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                            disabled={currentPage === totalPages}
+                            className="px-3 py-1 bg-blue-200 text-blue-700 rounded disabled:opacity-50"
+                          >Next ▶</button>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <p className="text-center text-gray-600">No registrations for this date.</p>
+                  )}
+                </>
+              )}
+            </div>
           ) : (
             <p className="text-center text-gray-600">Select a date to view registrations.</p>
           )}

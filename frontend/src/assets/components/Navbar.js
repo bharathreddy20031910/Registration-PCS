@@ -21,9 +21,11 @@ const HomePage = () => {
   const navRef = useRef();
   const cardRef = useRef(null);
   const [openIndex, setOpenIndex] = useState(null);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   const showNavbar = () => {
     navRef.current.classList.toggle('responsive_nav');
+    setIsNavOpen(!isNavOpen);
   };
 
   const scrollToSection = (ref) => {
@@ -43,7 +45,7 @@ const HomePage = () => {
   const faqData = [
     {
       question: 'How do I register?',
-      answer:"Visit the NATS official website, click on 'Student', and follow the sign-up instructions. You'll need your email, phone number, and qualification details.",
+      answer: "Visit the NATS official website, click on 'Student', and follow the sign-up instructions. You'll need your email, phone number, and qualification details.",
     },
     {
       question: 'Which locations are available?',
@@ -81,8 +83,9 @@ const HomePage = () => {
         </nav>
 
         <div className="md:hidden flex items-center gap-2">
-          <button className="nav-btn nav-close-btn" onClick={showNavbar}><FaTimes /></button>
-          <button className="nav-btn" onClick={showNavbar}><FaBars /></button>
+          <button className="nav-btn" onClick={showNavbar}>
+            {isNavOpen ? <FaTimes /> : <FaBars />}
+          </button>
         </div>
       </div>
 
@@ -122,21 +125,21 @@ const HomePage = () => {
         </h6>
       </div>
 
-      <div className="animation">
-        <div className="data1">
-          <div className="mx-auto max-w-[300px] h-[300px]">
+      <div className="animation-section">
+        <div className="animation-item">
+          <div className="animation-lottie">
             <Lottie animationData={Planningbackground} />
           </div>
           <h1>PLANNING</h1>
         </div>
-        <div className="data2">
-          <div className="mx-auto max-w-[300px] h-[300px]">
+        <div className="animation-item">
+          <div className="animation-lottie">
             <Lottie animationData={Investingbackground} />
           </div>
           <h1>INVESTING</h1>
         </div>
-        <div className="data3">
-          <div className="mx-auto max-w-[300px] h-[300px]">
+        <div className="animation-item">
+          <div className="animation-lottie">
             <Lottie animationData={Executingbackground} />
           </div>
           <h1>EXECUTING</h1>
@@ -154,20 +157,7 @@ const HomePage = () => {
             <div key={index} className="border-b pb-5 hover:bg-white px-4 rounded-md transition-shadow shadow-sm hover:shadow-md">
               <div className="flex justify-between items-center cursor-pointer" onClick={() => toggle(index)}>
                 <span className="text-xl sm:text-2xl font-medium text-gray-800">{item.question}</span>
-                {item.link ? (
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-base sm:text-lg text-blue-600 hover:text-blue-800 flex items-center gap-1"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <span className={`transform transition-transform duration-300 ${openIndex === index ? 'rotate-180' : 'rotate-90  text-3xl'}`}>⌄</span>
-                    Sign-up steps
-                  </a>
-                ) : (
-                  <span className={`text-base sm:text-lg text-gray-600 flex items-center gap-1 transform transition-transform duration-300 ${openIndex === index ? 'rotate-180' : 'rotate-90'}`}>⌄</span>
-                )}
+                <span className={`text-base sm:text-lg text-gray-600 flex items-center gap-1 transform transition-transform duration-300 ${openIndex === index ? 'rotate-180' : 'rotate-90'}`}>⌄</span>
               </div>
               {openIndex === index && (
                 <div className="mt-4 p-4 bg-white text-gray-700 rounded-md text-base sm:text-lg border border-gray-200">
@@ -189,15 +179,15 @@ const HomePage = () => {
             <ul className="space-y-4 text-gray-700 mb-6">
               <li className="flex items-start space-x-2">
                 <span className="text-xl">↠</span>
-                <span>Select your city: Bangalore, Kolkata, or Noida.<br/>_________________________________________________</span>
+                <span>Select your city: Bangalore, Kolkata, or Noida.<br />_________________________________________________</span>
               </li>
               <li className="flex items-start space-x-2">
                 <span className="text-xl">↠</span>
-                <span>Quick and easy registration process.<br/>_________________________________________________</span>
+                <span>Quick and easy registration process.<br />_________________________________________________</span>
               </li>
               <li className="flex items-start space-x-2">
                 <span className="text-xl">↠</span>
-                <span>Start with just a click.<br/>_________________________________________________</span>
+                <span>Start with just a click.<br />_________________________________________________</span>
               </li>
             </ul>
             <button onClick={() => scrollToSection(cardRef)} className="bg-indigo-500 hover:bg-indigo-600 text-white py-3 px-8 ml-7 text-xl rounded-md w-fit">

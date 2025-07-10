@@ -23,16 +23,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Node modules and builds
-node_modules/
-dist/
-build/
-*.zip
-
-# Logs and env
-*.log
-.env
-
-# System files
-.DS_Store
-Thumbs.db
